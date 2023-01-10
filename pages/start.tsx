@@ -48,7 +48,7 @@ export default function Start() {
           {!isEmpty(options) ? (
             options.map((r) => {
               return <li className="options-li" key={r.id}>
-                 <input type="radio" value={r.id} name="drone" onClick={(e)=>setState({...state,answer:e.target.value})}/>
+                 <input type="radio" value={r.id} name="drone" onClick={(e)=>setState({...state,answer:e.target.value})} defaultValue={''}/>
                  <label >{r.option}</label>
               </li>;
             })
@@ -62,7 +62,10 @@ export default function Start() {
 
   const onSubmit = () => {
     const correct_value = options.find((r)=>r.answer == true)
-    if(correct_value?.id == state.answer){
+    if(!state.answer){
+     alert("Please select a option")
+    }
+   else if(correct_value?.id == state.answer){
         window.open("/user_response?response=win","_self")
     }
     else{
@@ -71,13 +74,13 @@ export default function Start() {
   }
 
   const footer = (
-    <button className="confirm" onClick={()=>onSubmit()}>Continue</button>
+    <button className="confirm" onClick={() => onSubmit()}>Continue</button>
   )
   return (
-    <SiteLayout>
-      <div>       
+    
+           
         <Modal header={header} body={body} footer={footer}/>
-      </div>
-    </SiteLayout>
+     
+    
   );
 }

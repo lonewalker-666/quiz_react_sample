@@ -53,7 +53,6 @@ const Home = () => {
     </>
   );
   return (
-    <SiteLayout>
       <div>
         <div className="countDown_type_indicator">
           {started ? "Ends in" : "Starts in"}
@@ -68,7 +67,6 @@ const Home = () => {
           <Modal body={modal_body} header={header} footer={footer}/>
         )}
       </div>
-    </SiteLayout>
   );
 };
 
