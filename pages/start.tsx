@@ -5,15 +5,15 @@ import { Modal } from "../src/components/common/modal";
 import useCountDown from "../src/hooks/useCountDown";
 import SiteLayout from "../src/layout/siteLayout";
 import { isEmpty } from "lodash";
-import Timer from "../src/components/timer";
 
 export default function Start() {
   const [state, setState] = useState({
     question: 0,
     deadLine: moment().add(21, "seconds").format("MM/DD/YYYY HH:mm:ss"),
-    completed:false
+    completed:false,
+    answer: null
   });
- 
+
   const options = response.options.filter((r) => r.Q_id == +state.question + 1);
   const initial = {
     days: "00",
@@ -22,21 +22,14 @@ export default function Start() {
     seconds: "20",
     active: false,
   };
-  const nextQuizTime = moment().add(1, "day").format("MM/DD/YYYY") + " " + "09:30:00"
-  const next_intial = {
-    days: "00",
-    hours: "00",
-    minutes: "00",
-    seconds: "00",
-    active: false,
-  };
+
   const countDown = useCountDown(state.deadLine, initial);
-  const nextQuiz = useCountDown(nextQuizTime, next_intial);
+
 
   useEffect(() => {
-    countDown.seconds == "00" && setState({...state,completed:true})
+    countDown.seconds == "00" && window.open("/user_response?response=time_up","_self")
   }, [countDown.seconds])
-  
+
   const header = (
     <>
       <div>Quiz Game</div>
@@ -47,14 +40,17 @@ export default function Start() {
   );
   const body = (
     <>
-      <div>{`${+state.question + 1}).  ${
+      <div>{`${state.question + 1}).  ${
         response.question[state.question].question
       }`}</div>
       <div className="options-container">
         <ol type="A" className="options">
           {!isEmpty(options) ? (
             options.map((r) => {
-              return <li className="options-li" key={r.id}>{r.option}</li>;
+              return <li className="options-li" key={r.id}>
+                 <input type="radio" value={r.id} name="drone" onClick={(e)=>setState({...state,answer:e.target.value})}/>
+                 <label >{r.option}</label>
+              </li>;
             })
           ) : (
             <></>
@@ -64,18 +60,23 @@ export default function Start() {
     </>
   );
 
+  const onSubmit = () => {
+    const correct_value = options.find((r)=>r.answer == true)
+    if(correct_value?.id == state.answer){
+        window.open("/user_response?response=win","_self")
+    }
+    else{
+        window.open("/user_response?response=lose","_self")
+    }
+  }
+
   const footer = (
-    <button className="submit">Continue</button>
+    <button className="confirm" onClick={()=>onSubmit()}>Continue</button>
   )
   return (
     <SiteLayout>
-      <div>
-        {state.completed ?  <><div className="countDown_type_indicator">
-                 Time Up !!! Next Quiz Starts in :
-              </div><Timer countDown={nextQuiz} /></>
-        :
+      <div>       
         <Modal header={header} body={body} footer={footer}/>
-    }
       </div>
     </SiteLayout>
   );

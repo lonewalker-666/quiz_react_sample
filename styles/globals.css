@@ -7,7 +7,6 @@ html,body,.layout,.modal-container{
     position: fixed;
     width: 100%;
     height: 100vh;
-    overflow-y: scroll;
 }
 .layout{
     background-image: linear-gradient(to left, rgb(15, 80, 192),rgb(15, 120, 192),rgb(15, 150, 192),rgb(15, 170, 192),rgb(15, 180, 192));
@@ -74,6 +73,15 @@ position: sticky;
   box-shadow: 2px 2px 4px #000000;
 }
 
+.error{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 85vh;
+  font-size: 55px;
+}
+
+
 @media screen and (min-width: 600px) {
   .timer {
    font-size: 100px;
@@ -87,9 +95,12 @@ position: sticky;
   .modal{
     width: 95%;
    }
+   .error{
+    font-size: 30px;
+   }
 }
 
-@media screen and (max-width:300px) {
+@media screen and (max-width:360px) {
   .countDown_type_indicator{
     font-size: 30px;
     padding: 5px;
@@ -97,6 +108,9 @@ position: sticky;
   .modal{
    width: 95%;
   }
+  .error{
+    font-size: 30px;
+   }
 }
 
 .modal{
@@ -176,3 +190,4 @@ position: sticky;
 .danger{
   background-color: red;
 }
+
