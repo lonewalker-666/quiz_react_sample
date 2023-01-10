@@ -59,11 +59,11 @@ const Home = () => {
           {started ? "Ends in" : "Starts in"}
         </div>
         <Timer countDown={countDown} />
-        <div className="starter">
+        {started && <div className="starter">
           <button className="button" onClick={() => onShow("info_modal")}>
             Start
           </button>
-        </div>
+        </div>}
         {visible.info_modal && (
           <Modal body={modal_body} header={header} footer={footer}/>
         )}
