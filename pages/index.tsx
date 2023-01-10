@@ -1,4 +1,4 @@
-import Home from "../src/home";
+import Home from "../src/components/home";
 
 
 
