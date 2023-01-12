@@ -10,7 +10,7 @@ export default function Start() {
     question: 0,
     deadLine: moment().add(21, "seconds").format("MM/DD/YYYY HH:mm:ss"),
     completed:false,
-    answer: null
+    answer: ''
   });
 
   const options = response.options.filter((r) => r.Q_id == +state.question + 1);
@@ -47,7 +47,7 @@ export default function Start() {
           {!isEmpty(options) ? (
             options.map((r) => {
               return <li className="options-li" key={r.id}>
-                 <input type="radio" value={r.id} key={r.id} name="drone" onClick={(e)=>console.log(e.currentTarget.defaultValue)}/>
+                 <input type="radio" value={r.id} key={r.id} name="drone" onClick={(e)=>setState({...state,answer:e.currentTarget.defaultValue})}/>
                  <label >{r.option}</label>
               </li>;
             })
@@ -64,7 +64,7 @@ export default function Start() {
     if(!state.answer){
      alert("Please select a option")
     }
-   else if(correct_value?.id == state.answer){
+   else if(correct_value?.id == +state.answer){
         window.open("/user_response?response=win","_self")
     }
     else{
