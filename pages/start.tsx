@@ -25,9 +25,9 @@ export default function Start() {
   const countDown = useCountDown(state.deadLine, initial);
 
 
-  // useEffect(() => {
-  //   countDown.seconds == "00" && window.open("/user_response?response=time_up","_self")
-  // }, [countDown.seconds])
+  useEffect(() => {
+    countDown.seconds == "00" && window.open("/user_response?response=time_up","_self")
+  }, [countDown.seconds])
 
   const header = (
     <>
