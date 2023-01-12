@@ -8,13 +8,6 @@ import { useShowHide } from "../hooks/useShoeHide";
 import { Modal } from "./common/modal";
 
 const Home = () => {
-  useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8080/customers")
-      .then((res) => console.log(res.data))
-      .catch((e) => console.log(e));
-  }, []);
-
   const { visible, onShow, onHide } = useShowHide({ info_modal: false });
   const started = (moment().format("HH:mm:ss") > "09:30:00") && (moment().format("HH:mm:ss") < "18:00:00")
   const deadLine = started
