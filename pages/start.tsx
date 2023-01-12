@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { response } from "../mock/response";
 import { Modal } from "../src/components/common/modal";
 import useCountDown from "../src/hooks/useCountDown";
-import SiteLayout from "../src/layout/siteLayout";
 import { isEmpty } from "lodash";
 
 export default function Start() {
@@ -26,9 +25,9 @@ export default function Start() {
   const countDown = useCountDown(state.deadLine, initial);
 
 
-  useEffect(() => {
-    countDown.seconds == "00" && window.open("/user_response?response=time_up","_self")
-  }, [countDown.seconds])
+  // useEffect(() => {
+  //   countDown.seconds == "00" && window.open("/user_response?response=time_up","_self")
+  // }, [countDown.seconds])
 
   const header = (
     <>
@@ -48,7 +47,7 @@ export default function Start() {
           {!isEmpty(options) ? (
             options.map((r) => {
               return <li className="options-li" key={r.id}>
-                 <input type="radio" value={r.id} name="drone" onClick={(e)=>setState({...state,answer:e.target.value})} defaultValue={''}/>
+                 <input type="radio" value={r.id} key={r.id} name="drone" onClick={(e)=>console.log(e.currentTarget.defaultValue)}/>
                  <label >{r.option}</label>
               </li>;
             })
