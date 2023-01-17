@@ -1,14 +1,21 @@
 import moment from "moment";
-import { useRouter } from "next/router";
-import Timer from "../../src/components/timer";
+import React from "react";
+import Timer from "../../src/components/common/timer";
 import useCountDown from "../../src/hooks/useCountDown";
 import { user_response } from "../../src/lib/constants";
+import { u } from "../../src/lib/util";
 import CustomError from "../customError";
 
+interface Props{
+  query:{
+    response:string
+  }
+}
 
 
-const Response = ({query}) => {
-    const nextQuizTime = moment().add(1, "day").format("MM/DD/YYYY") + " " + "09:30:00"
+const Response = (props:Props) => {
+  const {query} = props
+    const nextQuizTime = moment().add(u.time_diff,'hours').format("MM/DD/YYYY") + " " + "09:30:00"
     const next_intial = {
       days: "00",
       hours: "00",
@@ -17,10 +24,10 @@ const Response = ({query}) => {
       active: false,
     };
     const nextQuiz = useCountDown(nextQuizTime, next_intial);
-    const response = user_response[query.response] || user_response["not_found"]
+    const response = user_response[query?.response] || user_response["not_found"]
 
     return(
-        response !=user_response["not_found"] ? <>
+        response != user_response["not_found"] ? <>
         <div className="countDown_type_indicator">
             {response}
         </div>
@@ -30,7 +37,7 @@ const Response = ({query}) => {
         
     )
 }
-Response.getInitialProps = ({query}) => {
+Response.getInitialProps = ({query}:Props) => {
     return {query}
   }
 

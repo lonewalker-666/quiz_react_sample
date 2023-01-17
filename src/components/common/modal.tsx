@@ -9,9 +9,9 @@ export const Modal = (props:any) => {
         <div className="modal-body">
             {body}
         </div>
-        <div className="modal-footer">
+       {footer && <div className="modal-footer">
            {footer}
-        </div>
+        </div>}
     </div>
     </div>
     )

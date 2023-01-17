@@ -22,7 +22,7 @@ position: sticky;
 .countDown_type_indicator{
   display: flex;
   justify-content: center;
-  font-size: 55px;
+  font-size: 45px;
   padding: 25px;
 }
 
@@ -90,7 +90,7 @@ position: sticky;
 
 @media screen and (min-width: 360px) and (max-width:600px){
   .timer {
-   font-size: 40px;
+   font-size: 35px;
   }
   .modal{
     width: 95%;
@@ -102,7 +102,7 @@ position: sticky;
 
 @media screen and (max-width:360px) {
   .countDown_type_indicator{
-    font-size: 30px;
+    font-size: 25px;
     padding: 5px;
   }
   .modal{
@@ -146,8 +146,6 @@ position: sticky;
   z-index: 1000;
   background-color: black;
   display: flex;
-  animation-name: modal;
-  animation-duration: 500ms;
 }
 
 .modal-body{
@@ -174,11 +172,23 @@ position: sticky;
 .confirm {
   background-color: green;
 }
-@keyframes modal {
-  0%{opacity: 0.3;}
-
-  100%{opacity: 0.9;}
+.loading-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+  opacity: 0.9;
+  height: 100%;
+  z-index: 1000;
+  background-color: black;
+  display: flex;
 }
+
+
 
 .time-reminder{
   padding: 2px;
@@ -190,7 +200,56 @@ position: sticky;
 .danger{
   background-color: red;
 }
-.form-error{
-  color: red;
-  left:10px
+
+.options-container{
+margin-top: 5px;
+}
+
+.options-li{
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid yellow;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: spin 2s linear infinite; 
+  animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-background{
+  border: 2px solid white;
+  border-radius: 10%;
+  background-color: white;
+  padding: 15px;
+}
+
+.options-li:hover{
+  background-color: #1691a1;
+  box-shadow: 2px 2px 4px #000000;
+}
+
+.locked-answer{
+  background-color: rgb(10, 238, 219);
+  box-shadow: 2px 2px 4px #000000;
+}
+.correct-answer{
+  background-color: green;
+  box-shadow: 2px 2px 4px #000000;
+}
+.wrong-answer{
+  background-color: red;
+  box-shadow: 2px 2px 4px #000000;
 }
